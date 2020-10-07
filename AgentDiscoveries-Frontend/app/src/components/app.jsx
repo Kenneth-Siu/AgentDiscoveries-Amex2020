@@ -19,7 +19,13 @@ import RegionForm from './admin/region-form';
 import UserForm from './admin/user-form';
 import Error from './error';
 
+import {apiRequest} from './utilities/request-helper';
+
 const App = () => {
+    React.useEffect(() => {
+        apiRequest('/locations');
+    }, []);
+
     return (
         <React.Fragment>
             <Router>
