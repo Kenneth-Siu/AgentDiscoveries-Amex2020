@@ -1,7 +1,15 @@
 import * as React from 'react';
 import {Button, ControlLabel, Form, FormControl, FormGroup} from 'react-bootstrap';
+import {StyledDegreeDirection, DegreeWrapper, FormRow, StyledFormGroup} from "./location-form.style";
 import {apiGet, apiPost, apiPut} from '../utilities/request-helper';
 import Message from '../message';
+
+const DegreeDirection = ({ isNorth }) => (
+    <StyledDegreeDirection>
+        <DegreeWrapper>&deg;</DegreeWrapper>
+        <span>{isNorth ? 'N' : 'W'}</span>
+    </StyledDegreeDirection>
+);
 
 export default class LocationForm extends React.Component {
     constructor(props) {
@@ -64,6 +72,24 @@ export default class LocationForm extends React.Component {
                                 value={this.state.regionId}
                                 onChange={this.onRegionIdChange}/>
                         </FormGroup>
+                        <FormRow>
+                            <StyledFormGroup>
+                                <ControlLabel>Latitude</ControlLabel>
+                                    <FormRow alignCenter>
+                                        <FormControl type='number'
+                                            placeholder='00.000'/>
+                                        <DegreeDirection isNorth />
+                                    </FormRow>
+                            </StyledFormGroup>
+                            <StyledFormGroup>
+                                <ControlLabel>Longitude</ControlLabel>
+                                <FormRow alignCenter>
+                                    <FormControl type='number'
+                                        placeholder='00.000'/>
+                                    <DegreeDirection />
+                                </FormRow>
+                            </StyledFormGroup>
+                        </FormRow>
                         <Button type='submit'>Submit</Button>
                     </Form>
                 </div>
