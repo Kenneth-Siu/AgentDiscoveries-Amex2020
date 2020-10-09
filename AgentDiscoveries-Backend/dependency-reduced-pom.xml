@@ -210,14 +210,6 @@
       <scope>test</scope>
       <exclusions>
         <exclusion>
-          <artifactId>selenium-api</artifactId>
-          <groupId>org.seleniumhq.selenium</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>selenium-chrome-driver</artifactId>
-          <groupId>org.seleniumhq.selenium</groupId>
-        </exclusion>
-        <exclusion>
           <artifactId>selenium-edge-driver</artifactId>
           <groupId>org.seleniumhq.selenium</groupId>
         </exclusion>
@@ -234,28 +226,12 @@
           <groupId>org.seleniumhq.selenium</groupId>
         </exclusion>
         <exclusion>
-          <artifactId>selenium-remote-driver</artifactId>
-          <groupId>org.seleniumhq.selenium</groupId>
-        </exclusion>
-        <exclusion>
           <artifactId>selenium-safari-driver</artifactId>
           <groupId>org.seleniumhq.selenium</groupId>
         </exclusion>
         <exclusion>
           <artifactId>selenium-support</artifactId>
           <groupId>org.seleniumhq.selenium</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>commons-exec</artifactId>
-          <groupId>org.apache.commons</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>okhttp</artifactId>
-          <groupId>com.squareup.okhttp3</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>okio</artifactId>
-          <groupId>com.squareup.okio</groupId>
         </exclusion>
       </exclusions>
     </dependency>
