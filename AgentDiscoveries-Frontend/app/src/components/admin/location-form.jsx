@@ -16,10 +16,12 @@ const LocationForm = ({ id }) => {
         siteName: '',
         location: '',
         timeZone: '',
-        regionId: ''
+        regionId: '',
+        latitude: '',
+        longitude: ''
     });
 
-    const { siteName, location, timeZone, regionId } = values;
+    const { siteName, location, timeZone, regionId, latitude, longitude } = values;
 
     const [message, setMessage] = useState({});
 
@@ -30,20 +32,22 @@ const LocationForm = ({ id }) => {
     }, []);
 
 
-    const handleTextChange = event => {
-        const { name, value } = event;
+    const handleChange = event => {
+        const { name, value } = event.target;
         setValues({ ...values, [name]: value });
-    }
-
-    const handleNumberChange = event => {
-        const { name, value } = event;
-        setValues({ ...values, [name]: parseInt(value) });
     }
 
     const handleSubmit = async event => {
         event.preventDefault();
 
-        const body = { siteName, location, timeZone, regionId };
+        const body = {
+            siteName,
+            location,
+            timeZone,
+            regionId: parseInt(regionId),
+            latitude: parseFloat(latitude),
+            longitude: parseFloat(longitude)
+        };
 
         try {
             if (id) {
@@ -61,7 +65,7 @@ const LocationForm = ({ id }) => {
 
     const loadLocation = async () => {
         try {
-            setValues(await apiGet('locations', id));
+            setValues({...values, ...await apiGet('locations', id)});
         } catch (error) {
             setMessage({ message: error.message, type: 'danger' });
         }
@@ -78,36 +82,43 @@ const LocationForm = ({ id }) => {
                         <ControlLabel>Site Name</ControlLabel>
                         <FormControl type='text' required
                                      placeholder='Enter site name'
+                                     name='siteName'
                                      value={siteName}
-                                     onChange={handleTextChange}/>
+                                     onChange={handleChange}/>
                     </FormGroup>
                     <FormGroup>
                         <ControlLabel>Location Name</ControlLabel>
                         <FormControl type='text' required
                                      placeholder='Enter location name'
+                                     name='location'
                                      value={location}
-                                     onChange={handleTextChange}/>
+                                     onChange={handleChange}/>
                     </FormGroup>
                     <FormGroup>
                         <ControlLabel>Time Zone</ControlLabel>
                         <FormControl type='text' required
                                      placeholder='Enter time zone (e.g. "Europe/London")'
+                                     name='timeZone'
                                      value={timeZone}
-                                     onChange={handleTextChange}/>
+                                     onChange={handleChange}/>
                     </FormGroup>
                     <FormGroup>
                         <ControlLabel>Region</ControlLabel>
                         <FormControl type='number'
                                      placeholder='Enter region ID (optional)'
+                                     name='regionId'
                                      value={regionId}
-                                     onChange={handleNumberChange}/>
+                                     onChange={handleChange}/>
                     </FormGroup>
                     <FormRow>
                         <StyledFormGroup>
                             <ControlLabel>Latitude</ControlLabel>
                             <FormRow alignCenter>
                                 <FormControl type='number'
-                                             placeholder='00.000'/>
+                                             placeholder='00.000'
+                                             name='latitude'
+                                             value={latitude}
+                                             onChange={handleChange}/>
                                 <DegreeDirection isNorth />
                             </FormRow>
                         </StyledFormGroup>
@@ -115,7 +126,10 @@ const LocationForm = ({ id }) => {
                             <ControlLabel>Longitude</ControlLabel>
                             <FormRow alignCenter>
                                 <FormControl type='number'
-                                             placeholder='00.000'/>
+                                             placeholder='00.000'
+                                             name='longitude'
+                                             value={longitude}
+                                             onChange={handleChange}/>
                                 <DegreeDirection />
                             </FormRow>
                         </StyledFormGroup>
