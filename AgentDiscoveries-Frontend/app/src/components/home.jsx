@@ -2,7 +2,7 @@ import React from 'react';
 import {apiGet} from './utilities/request-helper';
 
 const Home = () => (
-    <div>
+    <div className='col-md-8 col-md-offset-2'>
         <Welcome/>
         <TimeZones/>
     </div>
@@ -10,7 +10,7 @@ const Home = () => (
 
 const Welcome = () => (
     <div>
-        <h1>Hello P.A.T.R.I.O.T. agents</h1>
+        <h3>Hello P.A.T.R.I.O.T. agents</h3>
     </div>
 );
 
@@ -35,7 +35,9 @@ const TimeZones = () => {
 const TimeZone = ({timeZone}) => (
     <div>
         <span><strong>Time Zone:</strong> {timeZone}</span>
+        <p></p>
         <span><strong>Time:</strong> {new Date().toLocaleString('en-US', {timeZone})}</span>
+        <p></p>
     </div>
 );
 
