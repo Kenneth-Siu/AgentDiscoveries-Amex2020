@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {Button, ControlLabel, Form, FormControl, FormGroup} from 'react-bootstrap';
-import {StyledDegreeDirection, DegreeWrapper, FormRow, StyledFormGroup} from "./location-form.style";
+import {GoogleApiWrapper, Map, Marker} from 'google-maps-react';
+import {StyledDegreeDirection, DegreeWrapper, FormRow, StyledFormGroup, MapWrapper} from "./location-form.style";
 import {apiGet, apiPost, apiPut} from '../utilities/request-helper';
 import Message from '../message';
 
@@ -11,7 +12,9 @@ const DegreeDirection = ({ isNorth }) => (
     </StyledDegreeDirection>
 );
 
-const LocationForm = ({ id }) => {
+const LocationForm = ({ id, google }) => {
+    const [isLoaded, setIsLoaded] = useState(false);
+
     const [values, setValues] = useState({
         siteName: '',
         location: '',
@@ -27,7 +30,8 @@ const LocationForm = ({ id }) => {
 
     useEffect(() => {
         (async () => {
-            if (id) await loadLocation(id)
+            if (id) await loadLocation(id);
+            setIsLoaded(true);
         })();
     }, []);
 
@@ -70,6 +74,8 @@ const LocationForm = ({ id }) => {
             setMessage({ message: error.message, type: 'danger' });
         }
     };
+
+    if (!isLoaded) return <span>Loading...</span>;
 
     return (
         <div className='col-md-8 col-md-offset-2'>
@@ -134,6 +140,14 @@ const LocationForm = ({ id }) => {
                             </FormRow>
                         </StyledFormGroup>
                     </FormRow>
+                    <MapWrapper>
+                        <Map google={google}
+                             initialCenter={{lat: parseFloat(latitude), lng: -parseFloat(longitude)}}
+                             center={{lat: parseFloat(latitude), lng: -parseFloat(longitude)}}
+                             zoom={14}>
+                            <Marker title={siteName} name='Location' position={{lat: parseFloat(latitude), lng: -parseFloat(longitude)}}/>
+                        </Map>
+                    </MapWrapper>
                     <Button type='submit'>Submit</Button>
                 </Form>
             </div>
@@ -141,5 +155,4 @@ const LocationForm = ({ id }) => {
     );
 }
 
-export default LocationForm;
-
+export default GoogleApiWrapper({apiKey: 'GOOGLE_MAPS_API_KEY'})(LocationForm);
