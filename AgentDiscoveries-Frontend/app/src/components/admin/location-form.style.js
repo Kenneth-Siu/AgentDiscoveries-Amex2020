@@ -24,3 +24,9 @@ export const DegreeWrapper = styled.span`
     margin: 0 4px 0 2px;
 `;
 
+export const MapWrapper = styled.div`
+    position: relative;
+    height: 200px;
+    width: 100%;
+    margin-bottom: 15px;
+`;
