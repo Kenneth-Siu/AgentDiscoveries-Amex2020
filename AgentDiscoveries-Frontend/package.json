@@ -41,6 +41,7 @@
     "webpack-dev-server": "^3.8.0"
   },
   "dependencies": {
+    "google-maps-react": "^2.0.6",
     "moment": "^2.22.1",
     "query-string": "^6.1.0",
     "react": "^16.13.1",
