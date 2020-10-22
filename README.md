@@ -9,14 +9,13 @@ You'll need MySQL server and MySQL workbench, this can be downloaded from
 [here](https://dev.mysql.com/downloads/installer/) if you don't already have it.  When running
 through the installer you can keep all the default options.
 
-Update:
- - the `database.username` and `database.password` fields in `config.properties`.
- - the `javax.persistence.jdbc.user` and `javax.persistence.jdbc.password` fields in `META-INF/persistence.xml`.
-
 # Setup
 
 Open mysql workbench, choose the local mysql instance.
-Create a database called `agentdiscoveries` and then you can start the application which will create the necessary tables.
+Create a database called `agentdiscoveries`. Later, when you start the application it will create the necessary tables itself.
+
+ - Copy `AgentDiscoveries-Backend/src/main/resources/template_config.properties` and rename the new copy `config.properties`. Update the `database.username` and `database.password` fields in your new file.
+ - Copy `AgentDiscoveries-Backend/src/main/resources/META-INF/template_persistence.xml` and rename the new copy `persistence.xml`. Update the `javax.persistence.jdbc.user` and `javax.persistence.jdbc.password` fields in your new file.
 
 # Running the application
 
@@ -57,10 +56,9 @@ These should be deleted in the production environment.
 
 ## IntelliJ Configuration
 
-You can run `AgentDiscoveriesApplication` directly inside IntelliJ, but the frontend project must also have been built or else it can't serve the website.
+In order to run your application directly using IntelliJ, you should first make sure the frontend project has been built (or else it can't serve the website!). You can ensure this is automatically done by adding a 'build step' to the run configuration: Either `mvn build` or `npm run build` in the frontend project.
 
-You can ensure this is automatically done by adding a 'build step' to the run configuration:
-Either `mvn build` or `npm run build` in the frontend project.
+Then, in the run configuration, set the main class to be `AgentDiscoveriesApplication` and you'll be able to use IntelliJ to run your project.
 
 Alternatively, you can serve the frontend using a development server:
 

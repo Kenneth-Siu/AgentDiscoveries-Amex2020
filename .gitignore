@@ -1,3 +1,5 @@
 target/
 .idea
 *.iml
+AgentDiscoveries-Backend/src/main/resources/META-INF/persistence.xml
+AgentDiscoveries-Backend/src/main/resources/config.properties
